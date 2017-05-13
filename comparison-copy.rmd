@@ -1,0 +1,102 @@
+---
+title: "algo_comparison"
+author: "Alexander Sirotkin"
+date: "Saturday, September 17, 2016"
+output: html_document
+---
+
+
+```{r}
+library(dplyr)
+comparison.df<-read.csv("Comparison2.csv", encoding="UTF-8")
+head(comparison.df)
+
+length(unique(comparison.df[,2]))
+
+
+comparison.df<-aggregate(comparison.df,by = list(comparison.df[,2]),FUN=tail,n=1)
+comparison.df<-select(comparison.df, -1)
+
+sort(table(comparison.df[,3]))
+
+```
+
+```{r}
+subset.df<-comparison.df[,4:11]
+summary(subset.df)
+
+boxplot(subset.df)
+
+t.test(comparison.df[,4],comparison.df[,5], paired=T)
+
+t.test(comparison.df[,6],comparison.df[,7], paired=T)
+
+t.test(comparison.df[,8],comparison.df[,9], paired=T)
+
+t.test(comparison.df[,10],comparison.df[,11], paired=T)
+```
+
+```{r}
+sub.column <- c(4,5,12,13,20,21,28,29,36,37,44,45)
+subset.df<-comparison.df[,sub.column]
+summary(subset.df)
+
+boxplot(subset.df)
+
+sort(comparison.df[,36])
+
+```
+
+```{r}
+sub.column <- c(4,5,12,13,20,21,28,29,36,37,44,45)+4
+subset.df<-comparison.df[,sub.column]
+summary(subset.df)
+
+boxplot(subset.df)
+```
+
+
+```{r}
+sub.column <- c(4,5,12,13,20,21,28,29,36,37,44,45)+6
+subset.df<-comparison.df[,sub.column]
+summary(subset.df)
+
+boxplot(subset.df)
+```
+
+
+
+
+```{r}
+subset.df<-comparison.df[,4:11+8*3]
+summary(subset.df)
+
+boxplot(subset.df)
+
+t.test(comparison.df[,36], comparison.df[,37], paired=T)
+
+mean(comparison.df[,36],na.rm=T)
+mean(comparison.df[,37],na.rm=T)
+
+t.test(comparison.df[,38], comparison.df[,39], paired=T)
+
+t.test(comparison.df[,40], comparison.df[,41], paired=T)
+mean(comparison.df[,40],na.rm=T)
+mean(comparison.df[,41],na.rm=T)
+
+
+t.test(comparison.df[,42], comparison.df[,43], paired=T)
+
+```
+
+
+
+```{r}
+subset.df<-comparison.df[,4:11+8]
+summary(subset.df)
+
+boxplot(subset.df)
+
+```
+
+
